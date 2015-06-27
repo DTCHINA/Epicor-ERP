@@ -1,0 +1,17 @@
+Erp.Tables.Part Part;
+
+foreach (var ttOrderDtl_xRow in ttOrderDtl)
+{
+	foreach (var ttOrderDtl_iterator in (from ttOrderDtl_Row in ttOrderDtl
+		select ttOrderDtl_Row))
+	{
+		var ttOrderDtlRow = ttOrderDtl_iterator;
+		if (ttOrderDtl_xRow != null)
+		{
+			Part = (from Part_Row in Db.Part
+						where string.Compare(Part_Row.Company, ttOrderDtlRow.Company, true) == 0 && (Part_Row.PartNum == ttOrderDtlRow.PartNum)
+						select Part_Row).FirstOrDefault();
+						callContextBpmData.Character01 = Part.SalesDescription_c;
+		}
+}
+}

@@ -1,0 +1,9 @@
+/* Set CAPS */
+foreach (var ttOrderDtl_iterator in (from ttOrderDtl_Row in ttOrderDtl
+where string.Compare(ttOrderDtl_Row.RowMod, "A", true) == 0
+select ttOrderDtl_Row))
+{
+var ttOrderDtl_xRow = ttOrderDtl_iterator;
+
+ttOrderDtl_xRow.OrderQty = Convert.ToInt32(ttOrderDtl_xRow.OrderQty);
+}
