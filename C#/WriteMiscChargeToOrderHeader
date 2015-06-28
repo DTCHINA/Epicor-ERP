@@ -23,4 +23,4 @@ newCustomersRow["MiscCode"] = callContextBpmData.Character01;
 newCustomersRow["RowMod"] = "A";
 
 //Write the data to the table
-ttOrderMsc.Add(newCustomersRow); 
+ttOrderMsc.Add(newCustomersRow);

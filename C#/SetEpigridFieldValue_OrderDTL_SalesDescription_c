@@ -1,0 +1,17 @@
+Ice.Tables.UD11 UD11;
+
+foreach (var ttOrderDtl_xRow in ttOrderDtl)
+{
+        foreach (var ttOrderDtl_iterator in (from ttOrderDtl_Row in ttOrderDtl
+                select ttOrderDtl_Row))
+        {
+                var ttOrderDtlRow = ttOrderDtl_iterator;
+                if (ttOrderDtl_xRow != null)
+                {
+                        UD11 = (from UD11_Row in Db.UD11
+                                                where string.Compare(UD11_Row.Company, ttOrderDtlRow.Company, true) == 0 && (UD11_Row.Key1 == ttOrderDtlRow.PartNum)
+                                                select UD11_Row).FirstOrDefault();
+                                                callContextBpmData.Character01 = UD11.Character01;
+                }
+}
+}

@@ -1,0 +1,19 @@
+//reference the colour table
+Ice.Tables.UD11 UD11;
+//loop through the records
+foreach (var ttQuoteDtl_xRow in ttQuoteDtl)
+{
+        foreach (var ttQuoteDtl_iterator in (from ttQuoteDtl_Row in ttQuoteDtl
+                select ttQuoteDtl_Row))
+        {
+                var ttQuoteDtlRow = ttQuoteDtl_iterator;
+                if (ttQuoteDtl_xRow != null)
+                {
+                        UD11 = (from UD11_Row in Db.UD11
+where string.Compare(UD11_Row.Company, ttQuoteDtlRow.Company, true) == 0 && (UD11_Row.Key1 == ttQuoteDtlRow.PartNum)
+                        select UD11_Row).FirstOrDefault();
+                                                                                                //set Character01 to the colour code
+                        callContextBpmData.Character01 = UD11.Character01;
+                }
+}
+}

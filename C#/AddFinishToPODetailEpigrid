@@ -1,0 +1,33 @@
+//reference the part table
+Erp.Tables.Part Part;
+//reference UD01 table
+Ice.Tables.UD01 UD01;
+
+//loop through the lines
+foreach (var ttPODetail_xRow in ttPODetail)
+{
+        foreach (var ttPODetail_iterator in (from ttPODetail_Row in ttPODetail
+                select ttPODetail_Row))
+        {
+                var ttPODetailRow = ttPODetail_iterator;
+                if (ttPODetail_xRow != null)
+                {
+
+//find the Part finish code using the part number
+                        Part = (from Part_Row in Db.Part
+                                                where string.Compare(Part_Row.Company, ttPODetailRow.Company, true) == 0 && (Part_Row.PartNum == ttPODetailRow.PartNum)
+                                                select Part_Row).FirstOrDefault();
+//set Character01 to the finish code
+callContextBpmData.Character01 = Part.finish_c;
+
+//find the Part description using the finish code
+                        UD01 = (from UD01_Row in Db.UD01
+                                                where string.Compare(UD01_Row.Company, ttPODetailRow.Company, true) == 0 && (UD01_Row.Key1 == callContextBpmData.Character01)
+                                                select UD01_Row).FirstOrDefault();
+//set Character02 to the full finish description
+                                                callContextBpmData.Character02 = UD01.Character01;
+
+                }
+
+}
+}

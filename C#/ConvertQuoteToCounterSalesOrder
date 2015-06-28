@@ -1,0 +1,24 @@
+Erp.Tables.OrderHed OrderHed = null;
+foreach (var ttOrderHed_xRow in ttOrderHed)
+{
+    var ttOrderHedRow = ttOrderHed_xRow;
+//start the transaction
+    using (System.Transactions.TransactionScope txScope = IceDataContext.CreateDefaultTransactionScope())
+    {
+        foreach (var OrderHed_iterator in (from OrderHed_Row in Db.OrderHed  where
+              string.Compare
+                                        (ttOrderHed_xRow.Company, OrderHed_Row.Company, true) == 0 &&
+                                        ttOrderHed_xRow.OrderNum == OrderHed_Row.OrderNum
+       select OrderHed_Row))
+        {
+            OrderHed = OrderHed_iterator;
+            OrderHed.CounterSale = true;
+                                                OrderHed.CreatePackingSlip = true;
+                                                OrderHed.CreateInvoice = true;
+                                                OrderHed.ShipViaCode = ""0002"";
+        }
+       // Db.OrderHed.Update(OrderHed);
+                                Db.Validate();
+        txScope.Complete();//commit the transaction
+    }
+}
