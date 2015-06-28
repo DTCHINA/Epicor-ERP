@@ -1,3 +1,4 @@
+/* Auto Assign an Internal Reference  if set to zero, then increment when added */
 //AutoAssign InternalRef
 Ice.Tables.UDCodes UDCodes = null;
 

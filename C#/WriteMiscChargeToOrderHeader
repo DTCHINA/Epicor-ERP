@@ -1,6 +1,6 @@
-//Set the variable
+/*Write a Misc Charge to the Order Header Table*/
+//Set the variable up
 var newCustomersRow = ttOrderMsc.NewRow();
-
 //Set the Company
 newCustomersRow["Company"] = "SECONPLC";
 //Set the Frequency Code
@@ -21,6 +21,5 @@ newCustomersRow["SeqNum"] = 0;
 newCustomersRow["MiscCode"] = callContextBpmData.Character01;
 //Set the rowmod to A for ADD
 newCustomersRow["RowMod"] = "A";
-
 //Write the data to the table
 ttOrderMsc.Add(newCustomersRow);
